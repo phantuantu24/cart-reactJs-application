@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ProductItem from '../ProductItem/ProductItem';
 import './ProductList.css';
 
 class ProductList extends Component {
@@ -9,13 +8,7 @@ class ProductList extends Component {
       <section className="section">
         <h1 className="section-heading">Product List</h1>
         <div className="row">
-          {
-            products.length ? products.map(product => (
-              <ProductItem 
-                key={product.id}
-                product={product} />
-            )) : <h3>Product List is Empty</h3>
-          }
+          { this.props.children }
         </div>
       </section>
     );
