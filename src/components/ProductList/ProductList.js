@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ProductItem from '../ProductItem/ProductItem';
 import './ProductList.css';
-import { connect } from 'react-redux'
 
 class ProductList extends Component {
   render() {
@@ -23,12 +22,4 @@ class ProductList extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    products: state.products // propsName: state.reducerName
-  }
-}
-
-// const mapDispatchToProps
-
-export default connect(mapStateToProps, null)(ProductList);
+export default ProductList;
