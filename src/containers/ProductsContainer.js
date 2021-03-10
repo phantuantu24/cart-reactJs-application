@@ -13,7 +13,7 @@ export class ProductsContainer extends Component {
 			))
 		} else {
 			return (
-				<h3>Produc List is empty</h3>
+				<h3>Product List is empty</h3>
 			)
 		}
 	}
