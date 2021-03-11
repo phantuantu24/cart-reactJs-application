@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ProductItem from '../components/ProductItem/ProductItem'
 import ProductList from '../components/ProductList/ProductList'
+import * as message from '../constants/Message'
 import PropTypes from 'prop-types'
 export class ProductsContainer extends Component {
 
@@ -14,7 +15,7 @@ export class ProductsContainer extends Component {
 			))
 		} else {
 			return (
-				<h3>Product List is empty</h3>
+				<h3>{message.MSG_PRODUCT_LIST_EMPTY}</h3>
 			)
 		}
 	}
