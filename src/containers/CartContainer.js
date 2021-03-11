@@ -10,7 +10,7 @@ class CartContainer extends Component {
 	showCartItem = (cart) => {
 		var result = ''
 		if (cart.length > 0) {
-			return result = cart.map(cartItem => 
+			return result = cart.map((cartItem, index) => 
 				<CartItem key={cartItem.product.id} cartItem={cartItem}/>
 			)
 		} else {

@@ -1,41 +1,42 @@
 import * as types from '../constants/ActionType'
 
 const data = JSON.parse(localStorage.getItem('CART'))
-const initialStae = [
-	{
-		product: {
-			id: 1,
-			name: 'Iphone 7 Plus',
-			image: 'https://media3.scdn.vn/img2/2017/12_10/lTn2hE_simg_de2fe0_500x500_maxb.jpg',
-			description: 'Apple Production',
-			price: 500,
-			inventory: 10,
-			rating: 4
-		},
-		quantity: 5
-	},
-	{
-		product: {
-			id: 3,
-			name: 'Oppo F1s',
-			image: 'https://images-na.ssl-images-amazon.com/images/I/41UFVnYtHrL.jpg',
-			description: 'Oppo Production',
-			price: 450,
-			inventory: 5,
-			rating: 5
-		},
-		quantity: 3
-	}
-]
+const initialStae = data ? data : []
 
 const cart = (state = initialStae, action) => {
+	const { product, quantity } = action //product and quantity is given by action
+	var index = -1 //TO check not found product in state
 	switch (action.type) {
 		case types.ADD_TO_CART:
 			console.log(action)
+			index = findIndexInCart(state, product)
+			if (index !== -1) {
+				// state[index].quantity += quantity
+				state[index] = {
+					...state[index],
+					quantity: state[index].quantity += quantity
+				}
+			} else {
+				state.push({
+					product,
+					quantity
+				})
+			}
+			localStorage.setItem('CART', JSON.stringify(state))
 			return [...state]
 		default:
 			return [...state]
 	}
+}
+
+const findIndexInCart = (cart, product) => {
+	var index = -1
+	cart.forEach((item, i) => {
+		if (item.product.id === product.id) {
+			index = i
+		}
+	});
+	return index
 }
 
 export default cart
