@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import ProductItem from '../components/ProductItem/ProductItem'
 import ProductList from '../components/ProductList/ProductList'
+import PropTypes from 'prop-types'
 export class ProductsContainer extends Component {
 
 	showProductItem(products) {
 		if (products.length > 0) {
 			return products.map(product => (
-				<ProductItem 
+				<ProductItem
 					key={product.id}
-					product={product}/>
+					product={product} />
 			))
 		} else {
 			return (
@@ -23,11 +24,26 @@ export class ProductsContainer extends Component {
 		return (
 			<div>
 				<ProductList products={products}>
-					{ this.showProductItem(products) }
+					{this.showProductItem(products)}
 				</ProductList>
 			</div>
 		)
 	}
+}
+
+//Using PropsType to validate data
+ProductsContainer.propTypes = {
+	products: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.number.isRequired,
+			name: PropTypes.string.isRequired,
+			image: PropTypes.string.isRequired,
+			description: PropTypes.string.isRequired,
+			price: PropTypes.number.isRequired,
+			inventory: PropTypes.number.isRequired,
+			rating: PropTypes.number.isRequired
+		})
+	).isRequired
 }
 
 const mapStateToProps = (state) => {
