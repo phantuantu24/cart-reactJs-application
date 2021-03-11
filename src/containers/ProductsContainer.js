@@ -4,14 +4,18 @@ import ProductItem from '../components/ProductItem/ProductItem'
 import ProductList from '../components/ProductList/ProductList'
 import * as message from '../constants/Message'
 import PropTypes from 'prop-types'
+import { actAddToCart } from '../actions/index' 
 export class ProductsContainer extends Component {
 
 	showProductItem(products) {
+		var { onAddToCart } = this.props
 		if (products.length > 0) {
 			return products.map(product => (
 				<ProductItem
 					key={product.id}
-					product={product} />
+					product={product} 
+					onAddToCart={onAddToCart}
+				/>
 			))
 		} else {
 			return (
@@ -53,6 +57,12 @@ const mapStateToProps = (state) => {
 	}
 }
 
-// const mapDispatchToProps
+const mapDispatchToProps = (dispatch, props) => {
+	return {
+		onAddToCart: (product) => {
+			dispatch(actAddToCart(product, 1))
+		}
+	}
+}
 
-export default connect(mapStateToProps, null)(ProductsContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsContainer)
