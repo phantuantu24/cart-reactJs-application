@@ -13,6 +13,18 @@ const initialStae = [
 			rating: 4
 		},
 		quantity: 5
+	},
+	{
+		product: {
+			id: 3,
+			name: 'Oppo F1s',
+			image: 'https://images-na.ssl-images-amazon.com/images/I/41UFVnYtHrL.jpg',
+			description: 'Oppo Production',
+			price: 450,
+			inventory: 5,
+			rating: 5
+		},
+		quantity: 3
 	}
 ]
 

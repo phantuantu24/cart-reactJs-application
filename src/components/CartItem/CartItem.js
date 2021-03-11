@@ -9,8 +9,6 @@ class CartItem extends Component {
   
   render() {
     const { cartItem } = this.props
-
-    console.log(cartItem)
     return (
       <tr>
         <th scope="row">

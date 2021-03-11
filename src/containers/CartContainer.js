@@ -4,16 +4,24 @@ import PropTypes from 'prop-types'
 import Cart from '../components/Cart/Cart'
 import * as message from '../constants/Message'
 import CartItem from '../components/CartItem/CartItem'
+import CartResult from '../components/CartResult/CartResult'
 class CartContainer extends Component {
 
 	showCartItem = (cart) => {
 		var result = ''
 		if (cart.length > 0) {
 			return result = cart.map(cartItem => 
-				<CartItem key={cartItem.id} cartItem={cartItem}/>
+				<CartItem key={cartItem.product.id} cartItem={cartItem}/>
 			)
 		} else {
 			return result = message.MSG_CART_EMPTY
+		}
+	}
+
+	showTotalPrice = (cart) => {
+		var result = null
+		if (cart.length > 0) {
+			return result = <CartResult cart={cart}/>
 		}
 	}
 
@@ -23,6 +31,7 @@ class CartContainer extends Component {
 			<div>
 				<Cart>
 					{ this.showCartItem(cart) }
+					{ this.showTotalPrice(cart) }
 				</Cart>
 			</div>
 		)
