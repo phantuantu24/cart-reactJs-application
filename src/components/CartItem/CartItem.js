@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 import './CartItem.css';
+import * as Message from '../../constants/Message'
 
 class CartItem extends Component {
 
   showTotalPriceOfEachProduct = (price, quantity) => {
     return quantity * price
+  }
+
+  deleteItem(productId) {
+    this.props.onDeleteProductInCart(productId)
+    this.props.onChangeMessage(Message.MSG_DELETE_PRODUCT_FROM_CART_SUCCESS)
   }
   
   render() {
@@ -17,7 +23,7 @@ class CartItem extends Component {
         </th>
         <td>
           <h5>
-            <strong>{cartItem.product.name}s</strong>
+            <strong>{cartItem.product.name}</strong>
           </h5>
         </td>
         <td>{cartItem.product.price}$</td>
@@ -34,8 +40,14 @@ class CartItem extends Component {
         </td>
         <td>{ this.showTotalPriceOfEachProduct(cartItem.product.price, cartItem.quantity) }$</td>
         <td>
-          <button type="button" className="btn btn-sm btn-primary waves-effect waves-light" data-toggle="tooltip" data-placement="top"
-            title="" data-original-title="Remove item">
+          <button type="button" 
+            className="btn btn-sm btn-primary waves-effect waves-light" 
+            data-toggle="tooltip" 
+            data-placement="top"
+            title="" 
+            data-original-title="Remove item"
+            onClick={() => this.deleteItem(cartItem.product.id)}
+          >
             X
           </button>
         </td>
