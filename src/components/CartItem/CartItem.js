@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import './CartItem.css';
 import * as Message from '../../constants/Message'
 
@@ -8,13 +8,21 @@ class CartItem extends Component {
     return quantity * price
   }
 
-  deleteItem(productId) {
+  deleteItem = (productId) => {
     this.props.onDeleteProductInCart(productId)
     this.props.onChangeMessage(Message.MSG_DELETE_PRODUCT_FROM_CART_SUCCESS)
+  }
+
+  onUpdateQuantity = (productId, newQuantity) => {
+    if (newQuantity > 0) {
+      this.props.onUpdateProductInCart(productId, newQuantity)
+      this.props.onChangeMessage(Message.MSG_UPDATE_CART_SUCCESS)
+    }
   }
   
   render() {
     const { cartItem } = this.props
+    // const { quatity } = cartItem.quantity > 0 ? cartItem : this.state
     return (
       <tr>
         <th scope="row">
@@ -30,10 +38,14 @@ class CartItem extends Component {
         <td className="center-on-small-only">
           <span className="qty">{cartItem.quantity}</span>
           <div className="btn-group radio-group" data-toggle="buttons">
-            <label className="btn btn-sm btn-primary btn-rounded waves-effect waves-light">
+            <label
+              onClick={() => this.onUpdateQuantity(cartItem.product.id, cartItem.quantity - 1)} 
+              className="btn btn-sm btn-primary btn-rounded waves-effect waves-light">
               <a>—</a>
             </label>
-            <label className="btn btn-sm btn-primary btn-rounded waves-effect waves-light">
+            <label 
+              onClick={() => this.onUpdateQuantity(cartItem.product.id, cartItem.quantity + 1)} 
+              className="btn btn-sm btn-primary btn-rounded waves-effect waves-light">
               <a>+</a>
             </label>
           </div>
