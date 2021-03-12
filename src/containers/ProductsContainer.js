@@ -4,17 +4,18 @@ import ProductItem from '../components/ProductItem/ProductItem'
 import ProductList from '../components/ProductList/ProductList'
 import * as message from '../constants/Message'
 import PropTypes from 'prop-types'
-import { actAddToCart } from '../actions/index' 
+import * as Action from '../actions/index' 
 export class ProductsContainer extends Component {
 
 	showProductItem(products) {
-		var { onAddToCart } = this.props
+		var { onAddToCart, onChangeMessage } = this.props
 		if (products.length > 0) {
 			return products.map(product => (
 				<ProductItem
 					key={product.id}
 					product={product} 
 					onAddToCart={onAddToCart}
+					onChangeMessage={onChangeMessage}
 				/>
 			))
 		} else {
@@ -48,7 +49,8 @@ ProductsContainer.propTypes = {
 			inventory: PropTypes.number.isRequired,
 			rating: PropTypes.number.isRequired
 		})
-	).isRequired
+	).isRequired,
+	onChangeMessage: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => {
@@ -60,7 +62,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, props) => {
 	return {
 		onAddToCart: (product) => {
-			dispatch(actAddToCart(product, 1))
+			dispatch(Action.actAddToCart(product, 1))
+		},
+		onChangeMessage: (message) => {
+			dispatch(Action.actChangeMessage(message))
 		}
 	}
 }
