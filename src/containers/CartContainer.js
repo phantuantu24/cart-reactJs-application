@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Cart from '../components/Cart/Cart'
-import * as message from '../constants/Message'
+import * as Message from '../constants/Message'
 import CartItem from '../components/CartItem/CartItem'
 import CartResult from '../components/CartResult/CartResult'
 class CartContainer extends Component {
@@ -14,7 +14,7 @@ class CartContainer extends Component {
 				<CartItem key={cartItem.product.id} cartItem={cartItem}/>
 			)
 		} else {
-			return result = message.MSG_CART_EMPTY
+			return result = <tr><th>{Message.MSG_CART_EMPTY}</th></tr>
 		}
 	}
 
