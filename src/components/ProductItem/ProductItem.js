@@ -40,6 +40,9 @@ class ProductItem extends Component {
                 <a>{product.name}</a>
               </strong>
             </h4>
+            <h5 className="card-title">
+              Remainning Amount: {product.inventory}
+            </h5>
             <ul className="rating">
               <li>
                 {this.showRatingStar(product.rating)}

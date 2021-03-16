@@ -4,22 +4,28 @@ const data = JSON.parse(localStorage.getItem('CART'))
 const initialStae = data ? data : []
 
 const cart = (state = initialStae, action) => {
-	const { product, quantity } = action //product and quantity is given by action
+	const { product, quantity, newInventory } = action //product and quantity is given by action
 	var index = -1 //TO check not found product in state
 	switch (action.type) {
 		case Types.ADD_TO_CART:
 			console.log(action)
 			index = findIndexInCart(state, product)
 			if (index !== -1) {
-				state[index] = {
-					...state[index],
-					quantity: state[index].quantity += quantity
-				}
+				const inventoryValue = state[index].product.inventory
+				if (inventoryValue > 0) {
+					state[index] = {
+						...state[index],
+						quantity: state[index].quantity += quantity
+					}
+					state[index].product.inventory -= newInventory
+				}		
 			} else {
 				state.push({
 					product,
 					quantity
 				})
+				index = findIndexInCart(state, product)
+				state[index].product.inventory -= newInventory
 			}
 			localStorage.setItem('CART', JSON.stringify(state))
 			return [...state]

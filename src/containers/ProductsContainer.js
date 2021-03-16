@@ -62,7 +62,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch, props) => {
 	return {
 		onAddToCart: (product) => {
-			dispatch(Action.actAddToCart(product, 1))
+			dispatch(Action.actAddToCart(product, 1, 1))
 		},
 		onChangeMessage: (message) => {
 			dispatch(Action.actChangeMessage(message))
